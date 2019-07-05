@@ -23,3 +23,26 @@ An effective streamlined way of creating, regestering and excecuting multiple or
 		}
 +	Dynamic function linking on child append
 + 	Super simple to use
+
+## Usage
+Adding any event listner to an element looks like this:
+
+		<div auger auger-event="function.one;function.two"></div>
+Any element that needs to be handled as an auger is spesified with the `auger` attribute
+after that any paramater starting with `auger-` will be handled as an event keyword.
+
+For instance `auger-click` will bind an on click event. You can do this with any events you desire.
+
+The event callbacks take 3 arguments:
+1.	event 	: The original event object
+2.	next	: The callback to be called once your callback has concluded
+3.	auger	: The Auger for the element
+
+It will look something like this
+
+		function myCallback(event, next, auger){
+			...some thing here...
+			next();
+		}
+
+Failing to call `next` will result in the termination of the event thread.
