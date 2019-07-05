@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="Auger.js"></script>
+	<script>
+
+		function whatIsMyColor(event, next, auger){
+			auger.locals.color = event.target.style.backgroundColor;
+			next()
+		}
+
+		function IAmASquare(event, next, auger){
+			alert(`I Am ${auger.locals.color} A Square`)
+		}
+
+		function RandomColor(event, next, auger){
+			var colors = ["red", "green", "blue", "black", "pink", "orange", "opal", "cream", "grey"]
+			auger.locals.square.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]
+			next()
+		}
+
+		function findSquare(event, next, auger){
+			auger.locals.square = document.querySelector("#square")
+			next()
+		}
+
+		function testAppend(event, next, auger){
+			var el = document.createElement("div")
+			el.setAttribute("auger", "")
+			el.setAttribute("auger-click", "whatIsMyColor;IAmASquare")
+			var colors = ["red", "green", "blue", "black", "pink", "orange", "opal", "cream", "grey"]
+			el.style.backgroundColor =  colors[Math.floor(Math.random() * colors.length)]
+			el.style.width = "10px"
+			el.style.height = "10px"
+			auger.locals.square.appendChild(el)
+		}
+
+	</script>
+	<title>Document</title>
+</head>
+<body >
+	<div id="square" auger auger-click="whatIsMyColor;IAmASquare" style="display: flex; flex-wrap: wrap;width: 50px; height: 50px; background-color: red"></div>
+	<button auger auger-click="findSquare;RandomColor">Random color</button>
+	<button auger auger-click="findSquare;testAppend">Add small Block</button>
+</body>
+</html>
